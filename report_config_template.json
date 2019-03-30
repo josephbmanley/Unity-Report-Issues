@@ -2,5 +2,6 @@
     "webhook" : "DISCORD WEBHOOK",
     "secret" : "FLASK SECRET",
     "github_token" : "GITHUB TOKEN",
-    "git_user" : "USER REQUESTS ARE RESTRICTED TO"
+    "git_user" : "USER REQUESTS ARE RESTRICTED TO",
+    "key-name" : "NAME OF KEY IN SECRETS MANAGER"
 }
