@@ -19,7 +19,6 @@ def Notification(message):
 #Testable GET page
 @app.route('/service')
 def debug():
-    Notification("Service pinged!")
     return "Service is running!"
 
 #Endpoint for unity requests
