@@ -1,0 +1,4 @@
+{
+    "webhook" : "DISCORD WEBHOOK",
+    "secret" : "FLASK SECRET"
+}
