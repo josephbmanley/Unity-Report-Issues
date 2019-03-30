@@ -1,4 +1,5 @@
 from flask import *
+from github import Github
 import requests, json
 
 #Load config
@@ -22,7 +23,17 @@ def debug():
     return "Service is running!"
 
 #Endpoint for unity requests
-@app.route('/submit_issue/unity', methods=['POST'])
-def unity_issue():
-    Notification(json.dumps(request.get_json()))
+@app.route('/submit_issue/unity/<repository>', methods=['POST'])
+def unity_issue(repository):
+    intial_report = request.get_json()
+
+    #Create GitHub client
+    g = Github(config['github_token'])
+
+    #Create issue
+    repo = g.get_repo(config['git_user'] + "/" + repository)
+    issue = repo.create_issue(title=intial_report['Summary'])
+
+    Notification("Issue created: " + issue.html_url)
+    
     return "OK"
