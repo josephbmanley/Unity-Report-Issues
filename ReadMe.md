@@ -1,5 +1,4 @@
 # Report Issues for Unity Cloud Diagnostics
-![Functionality](https://img.shields.io/badge/Build-Not%20Functional-red.svg)
 ![GitHub repo size](https://img.shields.io/github/repo-size/toda-studios/Report-Issues.svg)
 ![Discord](https://img.shields.io/discord/559845341185310724.svg)
 
