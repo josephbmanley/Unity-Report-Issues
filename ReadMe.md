@@ -1,3 +1,5 @@
+![Build Stage](https://github.com/josephbmanley/Unity-Report-Issues/workflows/Build%20Stage/badge.svg)
+
 # Report Issues for Unity Cloud Diagnostics
 
 Zappa script that takes information from Unity Cloud Diagnostics and creates GitHub issues
