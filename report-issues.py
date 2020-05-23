@@ -1,37 +1,38 @@
-from flask import *
+from flask import Flask, request
 from github import Github
-import requests, json
+import config_manager
+import requests
 
 #Load config
-config = None
-with open("report_config.json") as config_file:
-  config = json.load(config_file)
+config = config_manager.Config()
 
 
 #Configure Flask App
 app = Flask(__name__)
-app.secret_key = config['secret']
+app.secret_key = config.get('secret', 'default_secret')
 
 #Send message to webhook
 def Notification(message):
-    requests.post(config['webhook'], data={'content': message})
+    webhook = config.get('notification_webhook')
+    if webhook:
+        requests.post(webhook, data={'content': message})
 
-#Testable GET page
+# Healthcheck endpoint
 @app.route('/service')
 def debug():
-    Notification("Service pinged!")
     return "Service is running!"
 
 #Endpoint for unity requests
-@app.route('/submit_issue/unity/<repository>', methods=['POST'])
-def unity_issue(repository):
+@app.route('/submit_issue/unity', methods=['POST'])
+def unity_issue():
     intial_report = request.get_json()
+    repository = config.get('repository')
 
     #Create GitHub client
-    g = Github(config['github_token'])
+    g = Github(config.get('github_token', None, True))
 
     #Create issue
-    repo = g.get_repo(config['git_user'] + "/" + repository)
+    repo = g.get_repo(config.get('git_user') + "/" + repository)
     issue = repo.create_issue(title=intial_report['Summary'])
 
     Notification("Issue created: " + issue.html_url)
